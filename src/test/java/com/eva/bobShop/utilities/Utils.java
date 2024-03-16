@@ -45,7 +45,7 @@ public class Utils {
 
 	private WebDriver driver;
 
-	private  ExtentReports extreport;
+	private ExtentReports extreport;
 
 	private ExtentTest extTest;
 
@@ -111,7 +111,7 @@ public class Utils {
 		extreport.setSystemInfo("Environment", "QA");
 		extreport.setSystemInfo("User Name", "Ajeet Yadav");
 		ExtentSparkReporter extSpark = new ExtentSparkReporter(
-				System.getProperty("user.dir") + "/Reports/" + date + appliactionName+".html");
+				System.getProperty("user.dir") + "/Reports/" + date + appliactionName + ".html");
 		extSpark.config().setDocumentTitle("Bob Shop Automation Reports");
 		extSpark.config().setReportName("Test Reports");
 		extreport.attachReporter(extSpark);
@@ -445,7 +445,7 @@ public class Utils {
 			extTest.log(Status.INFO, url + " - Opened Successfully  ");
 		} catch (Exception e) {
 
-			extTest.log(Status.FAIL,"URL "+ url + " - did not  Open ");
+			extTest.log(Status.FAIL, "URL " + url + " - did not  Open ");
 			throw e;
 		}
 	}
@@ -860,7 +860,7 @@ public class Utils {
 		Actions act = new Actions(driver);
 		String elementName = "";
 		try {
-			 elementName = we.getAccessibleName();
+			elementName = we.getAccessibleName();
 			act.moveToElement(we).build().perform();
 			extTest.log(Status.INFO, "Successfully mouceOver on the element  [" + elementName + " ] ");
 
@@ -1060,7 +1060,7 @@ public class Utils {
 	public void selectByValue(WebElement we, String optionValueAttribute) {
 		// WebElement we = searchElementOnHTML(locator, elementName);
 		Select selectDD = new Select(we);
-		String elementName ="" ;
+		String elementName = "";
 		try {
 			elementName = we.getAccessibleName();
 			selectDD.selectByValue(optionValueAttribute);
@@ -1143,7 +1143,7 @@ public class Utils {
 		List<String> list = new ArrayList<>();
 		List<WebElement> listofSelectedOptions = null;
 		try {
-			 elementName = we.getAccessibleName();
+			elementName = we.getAccessibleName();
 			listofSelectedOptions = slt.getAllSelectedOptions();
 			for (WebElement weOptions : listofSelectedOptions) {
 				String strSelectedoptions = weOptions.getText();
@@ -1174,7 +1174,7 @@ public class Utils {
 		Select slt = new Select(we);
 		String selectedOp = null;
 		try {
-			 elementName = we.getAccessibleName();
+			elementName = we.getAccessibleName();
 			WebElement selectOption = slt.getFirstSelectedOption();
 			selectedOp = selectOption.getText();
 			extTest.log(Status.INFO,
@@ -1390,7 +1390,28 @@ public class Utils {
 				"Successfully perform double Click on  Element [  " + elementName + " ]  Through Javascript ");
 	}
 
-	// ****************WebElement generic method****************
+	// ****************WebElement generic method****************\\\\
+
+	public List<String> getInnerTextOfElements(List<WebElement> elements) {
+		List<String> innertextValues = new ArrayList<>();
+		String elementName = "";
+		try {
+			for (WebElement we : elements) {
+				String value = we.getText();
+				innertextValues.add(value);
+			}
+
+		} catch (Exception e) {
+			extTest.log(Status.FAIL, "Element could not be clicked Due to Exception ");
+			extTest.addScreenCaptureFromPath(screenShot(elementName));
+			e.printStackTrace();
+			;
+
+		}
+		extTest.log(Status.FAIL, "Successfully fetch the innertext value of element and return");
+		return innertextValues;
+	}
+
 	/*
 	 * this method will clear text Box
 	 * 
@@ -1569,9 +1590,11 @@ public class Utils {
 	public void verifyTextContains(String actual, String expectedContains) {
 		if (actual.contains(expectedContains)) {
 
-			extTest.log(Status.PASS, "Actual Text [ " + actual + "] And Expected contains  matched  [" + expectedContains + "  ]");
+			extTest.log(Status.PASS,
+					"Actual Text [ " + actual + "] And Expected contains  matched  [" + expectedContains + "  ]");
 		} else {
-			extTest.log(Status.FAIL, "Actual Text [ " + actual + "] And Expected contains not  match [" + expectedContains + "  ]");
+			extTest.log(Status.FAIL,
+					"Actual Text [ " + actual + "] And Expected contains not  match [" + expectedContains + "  ]");
 		}
 	}
 	/*

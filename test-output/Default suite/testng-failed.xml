@@ -5,8 +5,8 @@
     <classes>
       <class name="com.eva.bobShop.TestCases.TestCases">
         <methods>
+          <include name="verifyProductAddToCard"/>
           <include name="teardown"/>
-          <include name="selectProductByCategory"/>
           <include name="createreport"/>
         </methods>
       </class> <!-- com.eva.bobShop.TestCases.TestCases -->

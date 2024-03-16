@@ -1,8 +1,11 @@
 package com.eva.bobShop.ObjectRepository;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import lombok.Getter;
@@ -32,4 +35,7 @@ public class CommonPageOR {
 	@FindBy(xpath = "//button[text()='Log in']")
 	private WebElement LoginBT;
 
+	@FindBys(@FindBy(xpath = "//div[@id='virtualCategoryList']//dl"))
+	private List<WebElement> allCategoryINT;
+	
 }

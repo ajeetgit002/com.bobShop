@@ -1,5 +1,7 @@
 package com.eva.bobShop.PageObject;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 
 import com.eva.bobShop.ObjectRepository.CommonPageOR;
@@ -35,6 +37,15 @@ public class CommonPage extends CommonPageOR {
 		ut.inputValue(getUsernameTB(), confi.getEmailOrUsername());
 		ut.inputValue(getPasswordTB(), confi.getPassword());
 		ut.click(getLoginBT());
+	}
+
+	public void allCategory() {
+
+		List<String> allCategory = ut.getInnerTextOfElements(getAllCategoryINT());
+		for (String str : allCategory) {
+			System.out.println(str);
+		}
+
 	}
 
 }
